@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <title>Non Map Centric (Charts)</title>
+    <link rel="stylesheet" href="./index.css" />
+    <script
+      type="module"
+      src="https://js.arcgis.com/calcite-components/3.0.3/calcite.esm.js"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://js.arcgis.com/4.32/esri/themes/light/main.css"
+    />
+    <script src="https://js.arcgis.com/4.32/"></script>
+
+    <script
+      type="module"
+      src="https://js.arcgis.com/map-components/4.32/arcgis-map-components.esm.js"
+    ></script>
+    <script
+      type="module"
+      src="https://js.arcgis.com/charts-components/4.32/arcgis-charts-components.esm.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://js.arcgis.com/charts-components/4.32/arcgis-charts-components.css"
+    />
+  </head>
+
+  <body>
+    <calcite-shell>
+      <calcite-navigation slot="header">
+        <calcite-navigation-logo slot="logo" heading="Non Map Centric (Charts)">
+        </calcite-navigation-logo>
+      </calcite-navigation>
+      <calcite-shell-panel slot="panel-start">
+        <calcite-panel>
+          <arcgis-bookmarks></arcgis-bookmarks>
+        </calcite-panel>
+      </calcite-shell-panel>
+
+      <calcite-shell-panel slot="panel-bottom" layout="horizontal" height="l">
+        <calcite-panel>
+          <arcgis-chart id="barchart" class="chart-container">
+            <arcgis-charts-action-bar
+              slot="action-bar"
+              id="barchart-action-bar"
+            ></arcgis-charts-action-bar>
+          </arcgis-chart>
+        </calcite-panel>
+      </calcite-shell-panel>
+      <arcgis-map item-id="d67e317a96fc4344a4a158f73d547f4e"></arcgis-map>
+    </calcite-shell>
+
+    <script type="module">
+      import { BarChartModel } from "https://js.arcgis.com/charts-model/4.32/index.js";
+      const arcgisMap = document.querySelector("arcgis-map");
+      arcgisMap.addEventListener("arcgisViewReadyChange", async (event) => {
+        const view = event.target.view;
+        const layer = view.map.allLayers.find(
+          (layer) => layer.id === "18066f67b9f-layer-5"
+        );
+        await layer.load();
+
+        const barchartElement = document.getElementById("barchart");
+        const barchartModel = new BarChartModel();
+        await barchartModel.setup({ layer });
+        const config = barchartModel.getConfig();
+
+        barchartElement.model = config;
+        barchartElement.layer = layer;
+      });
+    </script>
+  </body>
+</html>
