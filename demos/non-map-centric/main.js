@@ -1,40 +1,29 @@
 class NonMapCentric {
   constructor() {
     this.arcgisMap = document.querySelector("arcgis-map");
-    this.sheet = document.getElementById("sheet");
-    this.navigation = document.getElementById("nav");
-    this.panel = document.getElementById("sheet-panel");
-    this.dialog = document.getElementById("dialog");
-    this.toggleDialogNode = document.getElementById("toggleDialog");
+    this.bookmarks = document.getElementById("bookmarks");
+    this.legend = document.getElementById("legend");
   }
 
   initialize() {
-    this.setupMap();
-    this.setupUI();
+    this.initMapComponents();
   }
 
-  setupMap() {
-    if (this.arcgisMap) {
-      this.arcgisMap.addEventListener(
-        "arcgisViewReadyChange",
-        async (event) => {
-          const view = event?.target?.view;
-          if (view) {
-            this.setupViewElements(view);
-          }
-        }
-      );
-    }
+  initMapComponents() {
+    if (!this.arcgisMap) return;
+    this.arcgisMap.addEventListener("arcgisViewReadyChange", (event) => {
+      const view = event?.target?.view;
+      if (!view) return;
+      this.setupViewElements(view);
+    });
   }
 
   setupViewElements(view) {
-    const bookmarks = document.getElementById("bookmarks");
-    const legend = document.getElementById("legend");
-    if (bookmarks) {
-      bookmarks.view = view;
+    if (this.bookmarks) {
+      this.bookmarks.view = view;
     }
-    if (legend) {
-      legend.view = view;
+    if (this.legend) {
+      this.legend.view = view;
     }
 
     const layer = view.map.allLayers.find(
@@ -57,45 +46,6 @@ class NonMapCentric {
       chartElement.model = loadedLayer.charts[index];
       loadedLayer.charts[index].title.visible = false;
     });
-  }
-
-  setupUI() {
-    this.addEventListeners(
-      this.navigation,
-      "calciteNavigationActionSelect",
-      this.toggleSheet.bind(this, true)
-    );
-    this.addEventListeners(
-      this.panel,
-      "calcitePanelClose",
-      this.toggleSheet.bind(this, false)
-    );
-    this.addEventListeners(
-      this.toggleDialogNode,
-      "click",
-      this.toggleDialog.bind(this)
-    );
-  }
-
-  addEventListeners(element, event, handler) {
-    if (element) {
-      element.addEventListener(event, handler);
-    }
-  }
-
-  toggleSheet(open) {
-    if (this.sheet) {
-      this.sheet.open = open;
-      if (!open) {
-        this.panel.closed = false;
-      }
-    }
-  }
-
-  toggleDialog() {
-    if (this.dialog) {
-      this.dialog.open = !this.dialog.open;
-    }
   }
 }
 

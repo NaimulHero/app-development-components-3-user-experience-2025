@@ -35,35 +35,6 @@
   </head>
   <body>
     <calcite-shell>
-      <calcite-navigation id="nav" navigation-action slot="header">
-        <calcite-navigation-logo
-          href="#"
-          icon="globe"
-          alt="Application logo"
-          slot="logo"
-          heading="Museums in the United States"
-          description="Esri Developer & Technology Summit"
-        ></calcite-navigation-logo>
-        <calcite-action-pad
-          layout="horizontal"
-          expand-disabled
-          slot="content-end"
-        >
-          <calcite-action
-            id="toggleDialog"
-            text="About this application"
-            icon="information"
-          ></calcite-action>
-        </calcite-action-pad>
-
-        <calcite-tooltip
-          placement="bottom"
-          reference-element="toggleDialog"
-          close-on-click
-          slot="content-end"
-          >About this application</calcite-tooltip
-        >
-      </calcite-navigation>
       <calcite-panel>
         <div class="grid-container">
           <calcite-panel class="panel-bookmarks" heading="Bookmarks">
@@ -197,6 +168,7 @@
         >.
       </div>
     </calcite-dialog>
-    <script type="module" src="./main.js" />
+    <script src="../nav.js"></script>
+    <script type="module" src="./main.js"></script>
   </body>
 </html>
