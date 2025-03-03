@@ -12,7 +12,10 @@ const lightModeCss = document.getElementById("jsapi-mode-light");
 const arcgisMap = document.querySelector("arcgis-map");
 const panelStart = document.getElementById("panel-start");
 const featuresPanel = document.getElementById("features-panel");
+const chartsPanel = document.getElementById("charts-panel");
+const chartsShellPanel = document.getElementById("charts-shell-panel");
 const featuresComponent = document.querySelector("arcgis-features");
+const chartElement = document.getElementById("my-chart");
 
 panelStart.addEventListener(
   "calcitePanelClose",
@@ -24,11 +27,25 @@ featuresPanel.addEventListener(
   () => (featuresPanel.collapsed = true)
 );
 
+chartsPanel.addEventListener("calcitePanelClose", () => {
+  chartsShellPanel.collapsed = true;
+  chartAction.active = false;
+});
+
 let mode = "light";
 let map;
 
 arcgisMap.addEventListener("arcgisViewReadyChange", () => {
   map = arcgisMap.map;
+
+  const chartLayer = map.allLayers.find(
+    (layer) => layer.portalItem?.id === "7c2e774415ff49b8b6034b428f83fe6c"
+  );
+
+  chartElement.view = arcgisMap.view;
+  chartElement.layer = chartLayer;
+  chartElement.model = chartLayer.charts[0];
+  chartLayer.charts[0].title.visible = false;
 });
 
 // Add an event listener to the map to open the Features component when the user clicks on the map.
@@ -58,6 +75,14 @@ panelActions.forEach((action) => {
     });
     togglePanel(id);
   });
+});
+
+const chartAction = document.getElementById("chart-action");
+chartAction.addEventListener("click", () => {
+  const toggleValue = !chartsPanel.closed;
+  chartsShellPanel.collapsed = toggleValue;
+  chartsPanel.closed = toggleValue;
+  chartAction.active = toggleValue;
 });
 
 function togglePanel(id) {
