@@ -1,7 +1,10 @@
+import { dialogHtml } from "./dialog.js";
+import { sheetHtml } from "./sheet.js";
+import { navHtml } from "./nav.js";
+
 class Nav {
   constructor() {
-    this.createNav();
-
+    this.initialize();
     this.sheet = document.getElementById("sheet");
     this.navigation = document.getElementById("nav");
     this.panel = document.getElementById("sheet-panel");
@@ -9,57 +12,25 @@ class Nav {
     this.toggleDialogNode = document.getElementById("toggleDialog");
     this.toggleLayoutNode = document.getElementById("toggleLayoutNode");
     this.isMapCentric = window.location.href.includes("/map-centric");
-  }
-
-  initialize() {
     this.setupUI();
   }
 
-  createNav() {
-    const shell = document.querySelector("calcite-shell");
+  createAndInsertElement(htmlString, isNav = false) {
     const dummyContainer = document.createElement("div");
-    dummyContainer.innerHTML = `<calcite-navigation id="nav" navigation-action slot="header">
-        <calcite-navigation-logo
-          href="#"
-          icon="globe"
-          alt="Application logo"
-          slot="logo"
-          heading="Museums in the United States"
-          description="Non Map Centric"
-        ></calcite-navigation-logo>
-        <calcite-action-pad
-          layout="horizontal"
-          expand-disabled
-          slot="content-end"
-        >
-          <calcite-action
-            id="toggleLayoutNode"
-            text="Toggle layout"
-            icon="map"
-          ></calcite-action>
-          <calcite-action
-            id="toggleDialog"
-            text="About this application"
-            icon="information"
-          ></calcite-action>
-        </calcite-action-pad>
-        <calcite-tooltip
-          placement="bottom"
-          reference-element="toggleLayoutNode"
-          close-on-click
-          slot="content-end"
-          >Toggle layout</calcite-tooltip
-        >
-        <calcite-tooltip
-          placement="bottom"
-          reference-element="toggleDialog"
-          close-on-click
-          slot="content-end"
-          >About this application</calcite-tooltip
-        >
-      </calcite-navigation>`;
-    const navNode = dummyContainer.firstChild;
-    shell?.prepend(navNode);
+    dummyContainer.innerHTML = htmlString;
+    const element = dummyContainer.firstChild;
+    const shell = document.querySelector("calcite-shell");
+    if (isNav) {
+      shell?.prepend(element);
+    } else {
+      document.body.insertBefore(element, shell?.nextSibling);
+    }
+  }
+
+  initialize() {
+    this.createAndInsertElement(dialogHtml);
+    this.createAndInsertElement(sheetHtml);
+    this.createAndInsertElement(navHtml, true);
   }
 
   setupUI() {
@@ -106,7 +77,7 @@ class Nav {
     }
   }
 
-  toggleLayout(e) {
+  toggleLayout() {
     const urlObj = new URL(window.location.href);
     const demosPath = "/demos/";
     urlObj.pathname = this.isMapCentric
@@ -116,5 +87,4 @@ class Nav {
   }
 }
 
-const nav = new Nav();
-nav.initialize();
+new Nav();

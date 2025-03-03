@@ -2,9 +2,6 @@ class MapCentric {
   constructor() {
     this.arcgisMap = document.querySelector("arcgis-map");
     this.legend = document.getElementById("legend");
-  }
-
-  initialize() {
     this.initMapComponents();
   }
 
@@ -18,5 +15,4 @@ class MapCentric {
   }
 }
 
-const app = new MapCentric();
-app.initialize();
+new MapCentric();

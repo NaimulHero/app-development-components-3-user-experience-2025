@@ -3,9 +3,6 @@ class NonMapCentric {
     this.arcgisMap = document.querySelector("arcgis-map");
     this.bookmarks = document.getElementById("bookmarks");
     this.legend = document.getElementById("legend");
-  }
-
-  initialize() {
     this.initMapComponents();
   }
 
@@ -49,5 +46,4 @@ class NonMapCentric {
   }
 }
 
-const app = new NonMapCentric();
-app.initialize();
+new NonMapCentric();
