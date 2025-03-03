@@ -1,4 +1,4 @@
-const dialogHtml = `<calcite-dialog modal id="dialog" heading="About this application">
+export default `<calcite-dialog modal id="dialog" heading="About this application">
 <div>
   <calcite-notice open>
     <span slot="title"
@@ -33,5 +33,3 @@ const dialogHtml = `<calcite-dialog modal id="dialog" heading="About this applic
   >.
 </div>
 </calcite-dialog>`;
-
-export { dialogHtml };

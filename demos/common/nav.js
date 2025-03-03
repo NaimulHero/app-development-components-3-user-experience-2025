@@ -1,4 +1,4 @@
-const navHtml = `<calcite-navigation id="nav" navigation-action slot="header">
+export default `<calcite-navigation id="nav" navigation-action slot="header">
         <calcite-navigation-logo
           href="#"
           icon="globe"
@@ -38,5 +38,3 @@ const navHtml = `<calcite-navigation id="nav" navigation-action slot="header">
           >About this application</calcite-tooltip
         >
       </calcite-navigation>`;
-
-export { navHtml };

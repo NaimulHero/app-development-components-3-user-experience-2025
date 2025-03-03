@@ -1,4 +1,4 @@
-const sheetHtml = `<calcite-sheet id="sheet" display-mode="float" width-scale="m">
+export default `<calcite-sheet id="sheet" display-mode="float" width-scale="m">
 <calcite-panel
   heading="Esri Developer & Technology Summit"
   description="Helpful conference links"
@@ -39,5 +39,3 @@ const sheetHtml = `<calcite-sheet id="sheet" display-mode="float" width-scale="m
   </calcite-notice>
 </calcite-panel>
 </calcite-sheet>`;
-
-export { sheetHtml };

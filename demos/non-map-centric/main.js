@@ -1,8 +1,8 @@
 class NonMapCentric {
   constructor() {
     this.arcgisMap = document.querySelector("arcgis-map");
-    this.bookmarks = document.getElementById("bookmarks");
     this.legend = document.getElementById("legend");
+    this.bookmarks = document.getElementById("bookmarks");
     this.initMapComponents();
   }
 

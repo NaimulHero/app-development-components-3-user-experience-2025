@@ -1,8 +1,8 @@
-import { dialogHtml } from "./dialog.js";
-import { sheetHtml } from "./sheet.js";
-import { navHtml } from "./nav.js";
+import dialogHtml from "./dialog.js";
+import sheetHtml from "./sheet.js";
+import navHtml from "./nav.js";
 
-class Nav {
+class Common {
   constructor() {
     this.initialize();
     this.sheet = document.getElementById("sheet");
@@ -87,4 +87,4 @@ class Nav {
   }
 }
 
-new Nav();
+new Common();
