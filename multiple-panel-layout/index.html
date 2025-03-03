@@ -1,3 +1,4 @@
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -13,6 +14,10 @@
   <link id="jsapi-mode-light" rel="stylesheet" href="https://js.arcgis.com/4.32/esri/themes/light/main.css" />
   <link disabled id="jsapi-mode-dark" rel="stylesheet" href="https://js.arcgis.com/4.32/esri/themes/dark/main.css" />
   <script type="module" src="https://js.arcgis.com/map-components/4.32/arcgis-map-components.esm.js"></script>
+
+  <!-- Load Charts components from CDN-->
+  <script type="module" src="https://js.arcgis.com/charts-components/4.32/arcgis-charts-components.esm.js"></script>
+  <link rel="stylesheet" href="https://js.arcgis.com/charts-components/4.32/arcgis-charts-components.css" />
 
   <!-- Demo imports -->
   <script src="./app.js" defer></script>
@@ -35,101 +40,45 @@
         application</calcite-tooltip>
     </calcite-navigation>
 
-    <calcite-shell-panel slot="panel-start">
-      <calcite-panel heading="Maps SDK for JavaScript" description="Showcased product">
-        <calcite-action-bar slot="action-bar" expand-disabled>
-          <calcite-action-group>
-            <calcite-action text="export" icon="export"></calcite-action>
-            <calcite-action text="Duplicate" icon="duplicate"></calcite-action>
-          </calcite-action-group>
-          <calcite-action-group>
-            <calcite-action text="Save" icon="save"></calcite-action>
-          </calcite-action-group>
-          <calcite-action-group slot="actions-end">
-            <calcite-action text="Undo" icon="undo"></calcite-action>
-            <calcite-action text="Redo" icon="redo"></calcite-action>
-          </calcite-action-group>
-        </calcite-action-bar>
-
-        <calcite-action id="toggle-instructions" text="Instructions" icon="lightbulb"
-          slot="header-actions-end"></calcite-action>
-        <calcite-tooltip placement="bottom" reference-element="toggle-instructions" slot="header-actions-end">A quick
-          get-going hint about this demo</calcite-tooltip>
-        <calcite-block collapsible heading="Layer effects" description="Adjust blur, highlight, and order">
-          <calcite-icon scale="s" slot="icon" icon="effects"></calcite-icon>
-          <calcite-notice open>
-            <div slot="message">Use layer effects sparingly, for emphasis</div>
-          </calcite-notice>
-        </calcite-block>
-        <calcite-block collapsible heading="Symbology" description="Select type, color, and transparency">
-          <calcite-icon scale="s" slot="icon" icon="map-pin"></calcite-icon>
-
-          <calcite-label>
-            Effect type
-            <calcite-segmented-control width="full">
-              <calcite-segmented-control-item value="Blur">Blur</calcite-segmented-control-item>
-              <calcite-segmented-control-item checked value="Highlight">Highlight</calcite-segmented-control-item>
-            </calcite-segmented-control>
-          </calcite-label>
-
-          <calcite-label>
-            Something
-            <calcite-input placeholder="A great placeholder"></calcite-input>
-          </calcite-label>
-          <calcite-label>
-            Something numerical<calcite-input-number value="25" placeholder="--" suffix-text="%"
-              alignment="end"></calcite-input-number>
-          </calcite-label>
-        </calcite-block>
-
-        <calcite-fab slot="fab"></calcite-fab>
-
-        <calcite-notice open scale="s" slot="footer">
-          <span slot="title">What is being demonstrated?</span>
-          <span slot="message">
-            This demonstration application showcases
-            <strong>feature x</strong>, <strong>feature y</strong>, and <strong>feature z</strong>, with a small bit of
-            additional context
-            about the demo.
-          </span>
-        </calcite-notice>
+    <calcite-shell-panel id="panel-start" slot="panel-start">
+      <calcite-action-bar slot="action-bar">
+        <calcite-action-group>
+          <calcite-action data-toggle-panel="legend" text="Legend" icon="legend" active></calcite-action>
+          <calcite-action data-toggle-panel="layers" text="Layers" icon="layers"></calcite-action>
+          <calcite-action data-toggle-panel="bookmarks" text="Bookmarks" icon="bookmark"></calcite-action>
+        </calcite-action-group>
+        <calcite-action-group>
+          <calcite-action text="Chart" icon="graph-bar"></calcite-action>
+        </calcite-action-group>
+      </calcite-action-bar>
+      <calcite-panel closable id="legend" heading="Legend">
+        <arcgis-legend reference-element="my-map"></arcgis-legend>
+      </calcite-panel>
+      <calcite-panel hidden closable id="layers" heading="Layers">
+        <arcgis-layer-list reference-element="my-map"></arcgis-layer-list>
+      </calcite-panel>
+      <calcite-panel hidden closable id="bookmarks" heading="Bookmarks">
+        <arcgis-bookmarks reference-element="my-map"></arcgis-bookmarks>
       </calcite-panel>
     </calcite-shell-panel>
 
-    <arcgis-map item-id="05e015c5f0314db9a487a9b46cb37eca"> </arcgis-map>
+    <calcite-shell-panel collapsed id="features" slot="panel-end">
+      <arcgis-features reference-element="my-map"></arcgis-features>
+    </calcite-shell-panel>
+
+    <calcite-shell-panel slot="panel-bottom">
+      <arcgis-chart reference-element="my-map"></arcgis-chart>
+    </calcite-shell-panel>
+
+    <arcgis-map id="my-map" item-id="cece49703cc24b0783dffb3032b0679c">
+      <arcgis-search position="top-right"></arcgis-search>
+    </arcgis-map>
   </calcite-shell>
 
-  <!-- Demo template interactive elements -->
-  <calcite-alert open icon="effects" placement="bottom-end">
-    <div slot="title">Esri Developer & Technology Summit</div>
-    <div slot="message">Welcome to beautiful Palm Springs!</div>
-  </calcite-alert>
 
   <calcite-dialog modal id="modal" heading="About this application">
     <div>
-      <calcite-notice open>
-        <span slot="title">This demonstration application is a companion resource to the "My demo application" session
-          at Esri Developer & Technology Summit.
-        </span>
-      </calcite-notice>
-      This example illustrates
-      <calcite-link target="_blank" href="#"> a great topic</calcite-link>.
-      <ul>
-        <li>Main point 1.</li>
-        <li>Main point 2.</li>
-        <li>Main point 3.</li>
-      </ul>
-      <calcite-link target="_blank" href="#">Learn more</calcite-link> in the
-      <calcite-link target="_blank" href="#"> documentation</calcite-link>.
-      <hr />
-      <calcite-link target="_blank" href="#">Application source code</calcite-link>
-      is available in the
-      <calcite-link target="_blank" href="https://github.com/EsriDevEvents/">Esri Developer Events GitHub
-        organization</calcite-link>.
-      <hr />
-      <calcite-link target="_blank" href="#">Map data </calcite-link> is sourced from Esri Data and Maps /
-      <calcite-link target="_blank" href="https://livingatlas.arcgis.com/en/home/">ArcGIS Living Atlas of the
-        World</calcite-link>.
+
     </div>
   </calcite-dialog>
 

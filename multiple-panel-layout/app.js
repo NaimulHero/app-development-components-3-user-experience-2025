@@ -10,12 +10,52 @@ const sheetEl = document.getElementById("sheet");
 const darkModeCss = document.getElementById("jsapi-mode-dark");
 const lightModeCss = document.getElementById("jsapi-mode-light");
 const arcgisMap = document.querySelector("arcgis-map");
+const panelStart = document.getElementById("panel-start");
+
+panelStart.addEventListener(
+  "calcitePanelClose",
+  () => (panelStart.collapsed = true)
+);
 
 let mode = "light";
+let map;
+
+arcgisMap.addEventListener("arcgisViewReadyChange", () => {
+  map = arcgisMap.map;
+});
+
+const legendPanel = document.getElementById("legend");
+const layersPanel = document.getElementById("layers");
+const bookmarksPanel = document.getElementById("bookmarks");
+
+const panels = [legendPanel, layersPanel, bookmarksPanel];
+
+const panelActions = document.querySelectorAll("[data-toggle-panel]");
+
+panelActions.forEach((action) => {
+  action.addEventListener("click", () => {
+    const id = action.getAttribute("data-toggle-panel");
+    panelStart.collapsed = false;
+    panelActions.forEach((el) => {
+      el.active = el === action;
+    });
+    togglePanel(id);
+  });
+});
+
+function togglePanel(id) {
+  panels.forEach((panel) => {
+    const open = panel.id === id;
+    panel.closed = !open;
+    panel.hidden = !open;
+  });
+}
 
 toggleModeEl.addEventListener("click", () => handleModeChange());
 toggleModalEl.addEventListener("click", () => handleModalChange());
-navigationEl.addEventListener("calciteNavigationActionSelect", () => handleSheetOpen());
+navigationEl.addEventListener("calciteNavigationActionSelect", () =>
+  handleSheetOpen()
+);
 
 panelEl.addEventListener("calcitePanelClose", () => handlePanelClose());
 
@@ -24,13 +64,17 @@ function handleModeChange() {
   const isDarkMode = mode === "dark";
   darkModeCss.disabled = !darkModeCss.disabled;
   lightModeCss.disabled = !lightModeCss.disabled;
-  arcgisMap.itemId = isDarkMode ? "d5dda743788a4b0688fe48f43ae7beb9" : "05e015c5f0314db9a487a9b46cb37eca";
+  map.basemap = isDarkMode
+    ? { portalItem: { id: "082831bea053406792d29b2aedcf4a81" } }
+    : { portalItem: { id: "01126f0ff00143f5bcd451221ccf459a" } };
   toggleModeEl.icon = isDarkMode ? "moon" : "brightness";
-  document.body.className = isDarkMode ? "calcite-mode-dark" : undefined;
+  document.body.classList.toggle("calcite-mode-dark", isDarkMode);
 
   // maps sdk workaround
   const inverseMode = mode === "light" ? "dark" : "light";
-  const elements = document.getElementsByClassName(`calcite-mode-${inverseMode}`);
+  const elements = document.getElementsByClassName(
+    `calcite-mode-${inverseMode}`
+  );
   for (let i = 0; i < elements.length; i++) {
     const node = elements[i];
     node.classList.remove(`calcite-mode-${inverseMode}`);
