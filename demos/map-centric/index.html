@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <title>Museums in the United States</title>
+    <link rel="stylesheet" href="../common/common.css" />
+    <script
+      type="module"
+      src="https://js.arcgis.com/calcite-components/3.0.3/calcite.esm.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://js.arcgis.com/4.32/esri/themes/light/main.css"
+    />
+    <script src="https://js.arcgis.com/4.32/"></script>
+    <script
+      type="module"
+      src="https://js.arcgis.com/map-components/4.32/arcgis-map-components.esm.js"
+    ></script>
+  </head>
+  <body>
+    <calcite-shell>
+      <calcite-shell-panel slot="panel-start">
+        <calcite-panel>
+          <arcgis-legend id="legend"></arcgis-legend>
+        </calcite-panel>
+      </calcite-shell-panel>
+      <arcgis-map item-id="ad11753a40764bd39f7ac5685dffdc21">
+        <arcgis-placement position="top-left">
+          <arcgis-home></arcgis-home>
+          <arcgis-zoom></arcgis-zoom>
+        </arcgis-placement>
+        <arcgis-placement position="top-right"
+          ><arcgis-expand expanded>
+            <arcgis-bookmarks></arcgis-bookmarks> </arcgis-expand
+        ></arcgis-placement>
+      </arcgis-map>
+    </calcite-shell>
+
+    <script type="module" src="../common/common.js"></script>
+    <script src="./main.js"></script>
+  </body>
+</html>
