@@ -22,27 +22,6 @@ class NonMapCentric {
     if (this.legend) {
       this.legend.view = view;
     }
-
-    const layer = view.map.allLayers.find(
-      (layer) => layer.id === "18066f67b9f-layer-5"
-    );
-    this.setupCharts(layer, view);
-  }
-
-  async setupCharts(layer, view) {
-    const loadedLayer = await layer.load();
-    const charts = [
-      { id: "chart", index: 2 },
-      { id: "chart2", index: 5 },
-      { id: "chart3", index: 6 },
-    ];
-    charts.forEach(({ id, index }) => {
-      const chartElement = document.getElementById(id);
-      chartElement.view = view;
-      chartElement.layer = layer;
-      chartElement.model = loadedLayer.charts[index];
-      loadedLayer.charts[index].title.visible = false;
-    });
   }
 }
 
