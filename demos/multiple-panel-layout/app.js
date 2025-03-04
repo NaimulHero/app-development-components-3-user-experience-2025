@@ -16,6 +16,7 @@ const chartsPanel = document.getElementById("charts-panel");
 const chartsShellPanel = document.getElementById("charts-shell-panel");
 const featuresComponent = document.querySelector("arcgis-features");
 const chartElement = document.getElementById("my-chart");
+const snippet = document.getElementById("snippet");
 
 panelStart.addEventListener(
   "calcitePanelClose",
@@ -35,8 +36,11 @@ chartsPanel.addEventListener("calcitePanelClose", () => {
 let mode = "light";
 let map;
 
+
 arcgisMap.addEventListener("arcgisViewReadyChange", () => {
   map = arcgisMap.map;
+
+  snippet.innerHTML = map.portalItem.snippet;
 
   const chartLayer = map.allLayers.find(
     (layer) => layer.portalItem?.id === "7c2e774415ff49b8b6034b428f83fe6c"

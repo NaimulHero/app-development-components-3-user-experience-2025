@@ -67,7 +67,7 @@
       <arcgis-features reference-element="my-map"></arcgis-features>
     </calcite-shell-panel>
 
-    <calcite-shell-panel id="charts-shell-panel" collapsed display-mode="float" slot="panel-bottom" height="l"
+    <calcite-shell-panel id="charts-shell-panel" collapsed display-mode="dock" slot="panel-bottom" height="l"
       layout="horizontal">
       <calcite-panel id="charts-panel" closed closable
         heading="Sum of Grocery Stores within a 10 min Drive/Walk by County Name">
@@ -82,9 +82,7 @@
 
 
   <calcite-dialog modal id="modal" heading="About this application">
-    <div>
-
-    </div>
+    <p id="snippet"></p>
   </calcite-dialog>
 
   <calcite-sheet id="sheet" display-mode="float" width-scale="m">
