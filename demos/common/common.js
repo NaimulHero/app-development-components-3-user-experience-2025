@@ -5,6 +5,7 @@ import navHtml from "./nav.js";
 class Common {
   constructor() {
     this.initialize();
+    this.arcgisMap = document.querySelector("arcgis-map");
     this.sheet = document.getElementById("sheet");
     this.navigation = document.getElementById("nav");
     this.panel = document.getElementById("sheet-panel");
@@ -13,6 +14,12 @@ class Common {
     this.toggleLayoutNode = document.getElementById("toggleLayoutNode");
     this.isMapCentric = window.location.href.includes("/map-centric");
     this.setupUI();
+  }
+
+  initialize() {
+    this.createAndInsertElement(dialogHtml);
+    this.createAndInsertElement(sheetHtml);
+    this.createAndInsertElement(navHtml, true);
   }
 
   createAndInsertElement(htmlString, isNav = false) {
@@ -25,12 +32,6 @@ class Common {
     } else {
       document.body.insertBefore(element, shell?.nextSibling);
     }
-  }
-
-  initialize() {
-    this.createAndInsertElement(dialogHtml);
-    this.createAndInsertElement(sheetHtml);
-    this.createAndInsertElement(navHtml, true);
   }
 
   setupUI() {
@@ -54,6 +55,8 @@ class Common {
       "click",
       this.toggleLayout.bind(this)
     );
+
+    this.initMapComponents();
   }
 
   addEventListeners(element, event, handler) {
@@ -84,6 +87,43 @@ class Common {
       ? `${demosPath}non-map-centric`
       : `${demosPath}map-centric`;
     window.location.href = urlObj.href;
+  }
+
+  initMapComponents() {
+    if (!this.arcgisMap) return;
+    this.arcgisMap.addEventListener("arcgisViewReadyChange", (event) => {
+      const view = event?.target?.view;
+      if (!view) return;
+
+      const layer = view.map.allLayers.find(
+        (layer) => layer.id === "18066f67b9f-layer-5"
+      );
+      this.setupCharts(layer, view);
+    });
+  }
+
+  async setupCharts(layer, view) {
+    const loadedLayer = await layer.load();
+    const charts = [
+      { id: "chart", index: 2 },
+      { id: "chart2", index: 5 },
+      { id: "chart3", index: 6 },
+    ];
+    charts.forEach(({ id, index }) => {
+      const chartElement = document.getElementById(id);
+      if (chartElement?.parentElement) {
+        console.log(loadedLayer.charts[index]);
+        chartElement.parentElement.heading =
+          loadedLayer.charts[index].title.content.text;
+      }
+      chartElement.id = id;
+      chartElement.view = view;
+      chartElement.layer = layer;
+      chartElement.model = loadedLayer.charts[index];
+      loadedLayer.charts[index].title.visible = false;
+      loadedLayer.charts[index].legend.visible = false;
+      console.dir(chartElement);
+    });
   }
 }
 
