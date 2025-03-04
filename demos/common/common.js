@@ -112,7 +112,6 @@ class Common {
     charts.forEach(({ id, index }) => {
       const chartElement = document.getElementById(id);
       if (chartElement?.parentElement) {
-        console.log(loadedLayer.charts[index]);
         chartElement.parentElement.heading =
           loadedLayer.charts[index].title.content.text;
       }
@@ -122,7 +121,6 @@ class Common {
       chartElement.model = loadedLayer.charts[index];
       loadedLayer.charts[index].title.visible = false;
       loadedLayer.charts[index].legend.visible = false;
-      console.dir(chartElement);
     });
   }
 }
