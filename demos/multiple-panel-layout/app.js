@@ -16,6 +16,10 @@ const chartsPanel = document.getElementById("charts-panel");
 const chartsShellPanel = document.getElementById("charts-shell-panel");
 const featuresComponent = document.querySelector("arcgis-features");
 const chartElement = document.getElementById("my-chart");
+const snippet = document.getElementById("snippet");
+const thumbnail = document.getElementById("thumbnail");
+const itemUrl = document.getElementById("item-url");
+const title = document.getElementById("title");
 
 panelStart.addEventListener(
   "calcitePanelClose",
@@ -34,9 +38,16 @@ chartsPanel.addEventListener("calcitePanelClose", () => {
 
 let mode = "light";
 let map;
+let extent;
 
 arcgisMap.addEventListener("arcgisViewReadyChange", () => {
   map = arcgisMap.map;
+
+  title.textContent = map.portalItem.title;
+  snippet.innerHTML = map.portalItem.snippet;
+  itemUrl.href = map.portalItem.itemPageUrl;
+  thumbnail.src = map.portalItem.thumbnailUrl;
+  extent = map.portalItem.extent.clone();
 
   const chartLayer = map.allLayers.find(
     (layer) => layer.portalItem?.id === "7c2e774415ff49b8b6034b428f83fe6c"
@@ -46,6 +57,7 @@ arcgisMap.addEventListener("arcgisViewReadyChange", () => {
   chartElement.layer = chartLayer;
   chartElement.model = chartLayer.charts[0];
   chartLayer.charts[0].title.visible = false;
+  chartElement.runtimeDataFilters = { geometry: extent };
 });
 
 // Add an event listener to the map to open the Features component when the user clicks on the map.

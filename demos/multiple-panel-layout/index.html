@@ -67,24 +67,33 @@
       <arcgis-features reference-element="my-map"></arcgis-features>
     </calcite-shell-panel>
 
-    <calcite-shell-panel id="charts-shell-panel" collapsed display-mode="float" slot="panel-bottom" height="l"
+    <calcite-shell-panel id="charts-shell-panel" collapsed display-mode="dock" slot="panel-bottom" height="l"
       layout="horizontal">
       <calcite-panel id="charts-panel" closed closable
         heading="Sum of Grocery Stores within a 10 min Drive/Walk by County Name">
-        <arcgis-chart id="my-chart" filter-by-extent reference-element="my-map"></arcgis-chart>
+        <arcgis-chart id="my-chart" enable-responsive-features reference-element="my-map"></arcgis-chart>
       </calcite-panel>
     </calcite-shell-panel>
 
+    <calcite-popover reference-element="basemap-action" placement="right-start">
+      <calcite-panel style="width:300px; height:300px" heading="Select a basemap">
+        <arcgis-basemap-gallery reference-element="my-map"></arcgis-basemap-gallery>
+      </calcite-panel>
+    </calcite-popover>
+
     <arcgis-map popup-disabled id="my-map" item-id="cece49703cc24b0783dffb3032b0679c">
       <arcgis-search position="top-right"></arcgis-search>
+      <arcgis-placement position="top-left">
+        <calcite-action scale="s" id="basemap-action" icon="basemap"></calcite-action>
+      </arcgis-placement>
     </arcgis-map>
   </calcite-shell>
 
 
   <calcite-dialog modal id="modal" heading="About this application">
-    <div>
-
-    </div>
+    <h2 id="title"></h2>
+    <a id="item-url" target="_blank"><img id="thumbnail" width="200" height="133" /></a>
+    <p id="snippet"></p>
   </calcite-dialog>
 
   <calcite-sheet id="sheet" display-mode="float" width-scale="m">
