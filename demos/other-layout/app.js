@@ -1,22 +1,22 @@
 /** Calcite demo application boilerplate functionality - not related to demo content */
 
 const toggleModeEl = document.getElementById("toggle-mode");
-const toggleModalEl = document.getElementById("toggle-modal");
 
 const navigationEl = document.getElementById("nav");
-const modalEl = document.getElementById("modal");
+const panelEl = document.getElementById("sheet-panel");
+const sheetEl = document.getElementById("sheet");
 const darkModeCss = document.getElementById("jsapi-mode-dark");
 const lightModeCss = document.getElementById("jsapi-mode-light");
 const arcgisMap = document.querySelector("arcgis-map");
 const panelStart = document.getElementById("panel-start");
 const featuresPanel = document.getElementById("features-panel");
-const tableShellPanel = document.getElementById("table-shell-panel");
 const featuresComponent = document.querySelector("arcgis-features");
-const tableElement = document.getElementById("my-table");
-const snippet = document.getElementById("snippet");
-const thumbnail = document.getElementById("thumbnail");
-const itemUrl = document.getElementById("item-url");
-const title = document.getElementById("title");
+
+navigationEl.addEventListener("calciteNavigationActionSelect", () =>
+  handleSheetOpen()
+);
+
+panelEl.addEventListener("calcitePanelClose", () => handlePanelClose());
 
 panelStart.addEventListener(
   "calcitePanelClose",
@@ -33,19 +33,6 @@ let map;
 
 arcgisMap.addEventListener("arcgisViewReadyChange", () => {
   map = arcgisMap.map;
-
-  title.textContent = map.portalItem.title;
-  snippet.innerHTML = map.portalItem.snippet;
-  itemUrl.href = map.portalItem.itemPageUrl;
-  thumbnail.src = map.portalItem.thumbnailUrl;
-
-  const tableLayer = map.allLayers.find(
-    (layer) => layer.portalItem?.id === "7c2e774415ff49b8b6034b428f83fe6c"
-  );
-
-  tableElement.view = arcgisMap.view;
-  tableElement.layer = tableLayer;
-  tableElement.filterGeometry = arcgisMap.view.extent;
 });
 
 // Add an event listener to the map to open the Features component when the user clicks on the map.
@@ -64,24 +51,43 @@ const bookmarksPanel = document.getElementById("bookmarks");
 
 const panels = [legendPanel, layersPanel, bookmarksPanel];
 
-const panelActions = document.querySelectorAll("[data-toggle-panel]");
+const flowActions = document.querySelectorAll("[data-toggle-flow]");
+const flow = document.getElementById("flow");
+const rootFlowItem = document.getElementById("root-flow-item");
 
-panelActions.forEach((action) => {
+const drillInClassName = "drill-in";
+
+function createFlowItem(heading, componentName) {
+  const flowItem = document.createElement("calcite-flow-item");
+  flowItem.heading = heading;
+  flowItem.className = drillInClassName;
+  flowItem.selected = true;
+  const component = document.createElement(componentName);
+  component.referenceElement = "my-map";
+  flowItem.appendChild(component);
+  return flowItem;
+}
+
+flowActions.forEach((action) => {
   action.addEventListener("click", () => {
-    const id = action.getAttribute("data-toggle-panel");
-    panelStart.collapsed = false;
-    panelActions.forEach((el) => {
-      el.active = el === action;
-    });
-    togglePanel(id);
-  });
-});
+    rootFlowItem.selected = false;
+    document.querySelector(`.${drillInClassName}`)?.remove();
 
-const tableAction = document.getElementById("table-action");
-tableAction.addEventListener("click", () => {
-  const toggleValue = !tableShellPanel.collapsed;
-  tableShellPanel.collapsed = toggleValue;
-  tableAction.active = toggleValue;
+    let newFlowItem;
+    switch (action.getAttribute("data-toggle-flow")) {
+      case "legend":
+        newFlowItem = createFlowItem("Legend", "arcgis-legend");
+        break;
+      case "layers":
+        newFlowItem = createFlowItem("Layers", "arcgis-layer-list");
+        break;
+      case "bookmarks":
+        newFlowItem = createFlowItem("Bookmarks", "arcgis-bookmarks");
+        break;
+    }
+
+    flow.appendChild(newFlowItem);
+  });
 });
 
 function togglePanel(id) {
@@ -93,7 +99,8 @@ function togglePanel(id) {
 }
 
 toggleModeEl.addEventListener("click", () => handleModeChange());
-toggleModalEl.addEventListener("click", () => handleModalChange());
+
+panelEl.addEventListener("calcitePanelClose", () => handlePanelClose());
 
 function handleModeChange() {
   mode = mode === "dark" ? "light" : "dark";
@@ -118,6 +125,11 @@ function handleModeChange() {
   }
 }
 
-function handleModalChange() {
-  modalEl.open = !modalEl.open;
+function handleSheetOpen() {
+  sheetEl.open = true;
+  panelEl.closed = false;
+}
+
+function handlePanelClose() {
+  sheetEl.open = false;
 }

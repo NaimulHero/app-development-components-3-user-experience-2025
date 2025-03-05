@@ -3,16 +3,8 @@
 const toggleModeEl = document.getElementById("toggle-mode");
 
 const navigationEl = document.getElementById("nav");
-const panelEl = document.getElementById("sheet-panel");
-const sheetEl = document.getElementById("sheet");
 
 let map;
-
-navigationEl.addEventListener("calciteNavigationActionSelect", () =>
-  handleSheetOpen()
-);
-
-panelEl.addEventListener("calcitePanelClose", () => handlePanelClose());
 
 const darkModeCss = document.getElementById("jsapi-mode-dark");
 const lightModeCss = document.getElementById("jsapi-mode-light");
@@ -48,13 +40,4 @@ function handleModeChange() {
     node.classList.remove(`calcite-mode-${inverseMode}`);
     node.classList.add(`calcite-mode-${mode}`);
   }
-}
-
-function handleSheetOpen() {
-  sheetEl.open = true;
-  panelEl.closed = false;
-}
-
-function handlePanelClose() {
-  sheetEl.open = false;
 }
