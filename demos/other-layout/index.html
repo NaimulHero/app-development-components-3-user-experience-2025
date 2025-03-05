@@ -35,12 +35,23 @@
 
     </calcite-navigation>
 
-    <calcite-shell-panel id="panel-start" slot="panel-start">
+    <calcite-shell-panel id="panel-start" slot="panel-end">
 
 
 
       <calcite-flow id="flow">
         <calcite-flow-item id="root-flow-item" selected>
+          <calcite-action-bar slot="action-bar" expand-disabled>
+            <calcite-action id="save" text="Save" icon="save"></calcite-action>
+            <calcite-action id="download" text="Download" icon="download"></calcite-action>
+            <calcite-action id="contact" text="Contact" icon="email-address"></calcite-action>
+            <calcite-action id="share" text="Share" slot="actions-end" icon="share"></calcite-action>
+          </calcite-action-bar>
+
+          <calcite-tooltip placement="bottom" reference-element="save">Save this application</calcite-tooltip>
+          <calcite-tooltip placement="bottom" reference-element="download">Download this data</calcite-tooltip>
+          <calcite-tooltip placement="bottom" reference-element="contact">Email the author</calcite-tooltip>
+          <calcite-tooltip placement="bottom" reference-element="share">Share on social media</calcite-tooltip>
 
           <calcite-block collapsible open heading="Search">
             <arcgis-search reference-element="my-map"></arcgis-search>
@@ -62,6 +73,25 @@
             </calcite-list>
           </calcite-block>
 
+
+          <calcite-block collapsible heading="Basemap" description="" icon-start="basemap">
+            <calcite-chip-group selection-mode="single-persist">
+              <calcite-chip selected>Default</calcite-chip>
+              <calcite-chip value="satellite">Satellite</calcite-chip>
+              <calcite-chip value="streets">Streets</calcite-chip>
+            </calcite-chip-group>
+            <script>
+              const chipGroup = document.querySelector('calcite-chip-group');
+              let defaultBasemap;
+              chipGroup.addEventListener('calciteChipGroupSelect', (event) => {
+                const selectedChipValue = chipGroup.selectedItems[0]?.value;
+                if (!defaultBasemap) {
+                  defaultBasemap = map.basemap;
+                }
+                map.basemap = selectedChipValue ?? defaultBasemap;
+              });
+            </script>
+          </calcite-block>
 
 
 

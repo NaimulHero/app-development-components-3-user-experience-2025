@@ -15,8 +15,7 @@ calcite-navigation-logo {
   --calcite-navigation-logo-text-color: var(--calcite-color-brand);
 }
 
-calcite-shell-panel[slot="panel-start"] calcite-flow,
-calcite-shell-panel[slot="panel-start"] calcite-panel {
+calcite-shell-panel[slot="panel-end"] calcite-flow {
   border-top: 0;
 }
 
