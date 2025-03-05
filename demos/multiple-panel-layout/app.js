@@ -12,10 +12,9 @@ const lightModeCss = document.getElementById("jsapi-mode-light");
 const arcgisMap = document.querySelector("arcgis-map");
 const panelStart = document.getElementById("panel-start");
 const featuresPanel = document.getElementById("features-panel");
-const chartsPanel = document.getElementById("charts-panel");
-const chartsShellPanel = document.getElementById("charts-shell-panel");
+const tableShellPanel = document.getElementById("table-shell-panel");
 const featuresComponent = document.querySelector("arcgis-features");
-const chartElement = document.getElementById("my-chart");
+const tableElement = document.getElementById("my-table");
 const snippet = document.getElementById("snippet");
 const thumbnail = document.getElementById("thumbnail");
 const itemUrl = document.getElementById("item-url");
@@ -31,14 +30,8 @@ featuresPanel.addEventListener(
   () => (featuresPanel.collapsed = true)
 );
 
-chartsPanel.addEventListener("calcitePanelClose", () => {
-  chartsShellPanel.collapsed = true;
-  chartAction.active = false;
-});
-
 let mode = "light";
 let map;
-let extent;
 
 arcgisMap.addEventListener("arcgisViewReadyChange", () => {
   map = arcgisMap.map;
@@ -47,17 +40,14 @@ arcgisMap.addEventListener("arcgisViewReadyChange", () => {
   snippet.innerHTML = map.portalItem.snippet;
   itemUrl.href = map.portalItem.itemPageUrl;
   thumbnail.src = map.portalItem.thumbnailUrl;
-  extent = map.portalItem.extent.clone();
 
-  const chartLayer = map.allLayers.find(
+  const tableLayer = map.allLayers.find(
     (layer) => layer.portalItem?.id === "7c2e774415ff49b8b6034b428f83fe6c"
   );
 
-  chartElement.view = arcgisMap.view;
-  chartElement.layer = chartLayer;
-  chartElement.model = chartLayer.charts[0];
-  chartLayer.charts[0].title.visible = false;
-  chartElement.runtimeDataFilters = { geometry: extent };
+  tableElement.view = arcgisMap.view;
+  tableElement.layer = tableLayer;
+  tableElement.filterGeometry = arcgisMap.view.extent;
 });
 
 // Add an event listener to the map to open the Features component when the user clicks on the map.
@@ -89,12 +79,11 @@ panelActions.forEach((action) => {
   });
 });
 
-const chartAction = document.getElementById("chart-action");
-chartAction.addEventListener("click", () => {
-  const toggleValue = !chartsPanel.closed;
-  chartsShellPanel.collapsed = toggleValue;
-  chartsPanel.closed = toggleValue;
-  chartAction.active = toggleValue;
+const tableAction = document.getElementById("table-action");
+tableAction.addEventListener("click", () => {
+  const toggleValue = !tableShellPanel.collapsed;
+  tableShellPanel.collapsed = toggleValue;
+  tableAction.active = toggleValue;
 });
 
 function togglePanel(id) {

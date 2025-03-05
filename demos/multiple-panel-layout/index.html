@@ -15,10 +15,6 @@
   <link disabled id="jsapi-mode-dark" rel="stylesheet" href="https://js.arcgis.com/4.32/esri/themes/dark/main.css" />
   <script type="module" src="https://js.arcgis.com/map-components/4.32/arcgis-map-components.esm.js"></script>
 
-  <!-- Load Charts components from CDN-->
-  <script type="module" src="https://js.arcgis.com/charts-components/4.32/arcgis-charts-components.esm.js"></script>
-  <link rel="stylesheet" href="https://js.arcgis.com/charts-components/4.32/arcgis-charts-components.css" />
-
   <!-- Demo imports -->
   <script src="./app.js" defer></script>
   <link rel="stylesheet" href="./style.css" />
@@ -28,17 +24,14 @@
   <calcite-shell>
     <calcite-navigation navigation-action slot="header" id="nav">
       <calcite-navigation-logo href="#" icon="shopping-cart" alt="Shopping Cart" slot="logo"
-        heading="Grocery access in the United States"
-        description="Which areas are within a 10 minute walk or 10 minute drive of a grocery store in 2024"></calcite-navigation-logo>
+        heading="Grocery access in the United States (2024)"
+        description="Areas within a 10 min walk or drive of a grocery store"></calcite-navigation-logo>
       <calcite-action-pad layout="horizontal" expand-disabled slot="content-end">
         <calcite-action id="toggle-mode" text="Toggle mode" icon="brightness"></calcite-action>
-        <calcite-action id="toggle-modal" text="About this application" icon="information"></calcite-action>
       </calcite-action-pad>
 
       <calcite-tooltip placement="bottom" reference-element="toggle-mode" slot="content-end">Toggle
         mode</calcite-tooltip>
-      <calcite-tooltip placement="bottom" reference-element="toggle-modal" close-on-click slot="content-end">About this
-        application</calcite-tooltip>
     </calcite-navigation>
 
     <calcite-shell-panel id="panel-start" slot="panel-start">
@@ -49,8 +42,10 @@
           <calcite-action data-toggle-panel="bookmarks" text="Bookmarks" icon="bookmark"></calcite-action>
         </calcite-action-group>
         <calcite-action-group>
-          <calcite-action id="chart-action" text="Chart" icon="graph-bar"></calcite-action>
+          <calcite-action id="table-action" text="Table" icon="table"></calcite-action>
         </calcite-action-group>
+        <calcite-action slot="actions-end" id="toggle-modal" text="About this application"
+          icon="information"></calcite-action>
       </calcite-action-bar>
       <calcite-panel closable id="legend" heading="Legend">
         <arcgis-legend reference-element="my-map"></arcgis-legend>
@@ -67,12 +62,9 @@
       <arcgis-features reference-element="my-map"></arcgis-features>
     </calcite-shell-panel>
 
-    <calcite-shell-panel id="charts-shell-panel" collapsed display-mode="dock" slot="panel-bottom" height="l"
+    <calcite-shell-panel id="table-shell-panel" collapsed display-mode="dock" slot="panel-bottom" height="l"
       layout="horizontal">
-      <calcite-panel id="charts-panel" closed closable
-        heading="Sum of Grocery Stores within a 10 min Drive/Walk by County Name">
-        <arcgis-chart id="my-chart" enable-responsive-features reference-element="my-map"></arcgis-chart>
-      </calcite-panel>
+      <arcgis-feature-table id="my-table" reference-element="my-map"></arcgis-feature-table>
     </calcite-shell-panel>
 
     <calcite-popover reference-element="basemap-action" placement="right-start">
@@ -88,7 +80,6 @@
       </arcgis-placement>
     </arcgis-map>
   </calcite-shell>
-
 
   <calcite-dialog modal id="modal" heading="About this application">
     <h2 id="title"></h2>
@@ -115,6 +106,8 @@
       </calcite-notice>
     </calcite-panel>
   </calcite-sheet>
+  <calcite-tooltip placement="trailing" reference-element="toggle-modal" close-on-click slot="content-end">About this
+    application</calcite-tooltip>
 </body>
 
 </html>
