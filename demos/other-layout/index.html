@@ -35,7 +35,7 @@
 
     </calcite-navigation>
 
-    <calcite-shell-panel id="panel-start" slot="panel-end">
+    <calcite-shell-panel id="panel-start" slot="panel-start">
 
 
 
@@ -57,15 +57,11 @@
             <arcgis-search reference-element="my-map"></arcgis-search>
           </calcite-block>
 
-          <calcite-block collapsible heading="Information" description="" icon-start="information">
+
+          <calcite-block collapsible heading="Map" description="" icon-start="map">
             <calcite-list>
               <calcite-list-item data-toggle-flow="legend" label="Legend" icon-start="legend" icon-end="chevron-right"
                 icon-flip-rtl="end"></calcite-list-item>
-            </calcite-list>
-          </calcite-block>
-
-          <calcite-block collapsible heading="Controls" description="" icon-start="gear">
-            <calcite-list>
               <calcite-list-item data-toggle-flow="layers" label="Layers" icon-start="layers" icon-end="chevron-right"
                 icon-flip-rtl="end"></calcite-list-item>
               <calcite-list-item data-toggle-flow="bookmarks" label="Bookmarks" icon-start="bookmark"
@@ -74,7 +70,7 @@
           </calcite-block>
 
 
-          <calcite-block collapsible heading="Basemap" description="" icon-start="basemap">
+          <calcite-block collapsible heading="Change Basemap" description="" icon-start="basemap">
             <calcite-chip-group selection-mode="single-persist">
               <calcite-chip selected>Default</calcite-chip>
               <calcite-chip value="satellite">Satellite</calcite-chip>
@@ -103,12 +99,7 @@
 
     </calcite-shell-panel>
 
-    <calcite-shell-panel id="features-panel" collapsed id="features" slot="panel-end">
-      <arcgis-features reference-element="my-map"></arcgis-features>
-    </calcite-shell-panel>
-
-
-    <arcgis-map popup-disabled id="my-map" item-id="cece49703cc24b0783dffb3032b0679c">
+    <arcgis-map id="my-map" item-id="cece49703cc24b0783dffb3032b0679c">
     </arcgis-map>
   </calcite-shell>
 

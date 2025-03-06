@@ -9,8 +9,6 @@ const darkModeCss = document.getElementById("jsapi-mode-dark");
 const lightModeCss = document.getElementById("jsapi-mode-light");
 const arcgisMap = document.querySelector("arcgis-map");
 const panelStart = document.getElementById("panel-start");
-const featuresPanel = document.getElementById("features-panel");
-const featuresComponent = document.querySelector("arcgis-features");
 
 navigationEl.addEventListener("calciteNavigationActionSelect", () =>
   handleSheetOpen()
@@ -23,26 +21,12 @@ panelStart.addEventListener(
   () => (panelStart.collapsed = true)
 );
 
-featuresPanel.addEventListener(
-  "calciteFlowItemClose",
-  () => (featuresPanel.collapsed = true)
-);
 
 let mode = "light";
 let map;
 
 arcgisMap.addEventListener("arcgisViewReadyChange", () => {
   map = arcgisMap.map;
-});
-
-// Add an event listener to the map to open the Features component when the user clicks on the map.
-arcgisMap.addEventListener("arcgisViewClick", (event) => {
-  const { mapPoint } = event.detail;
-  featuresPanel.collapsed = false;
-  featuresComponent.open({
-    location: mapPoint,
-    fetchFeatures: true,
-  });
 });
 
 const legendPanel = document.getElementById("legend");
