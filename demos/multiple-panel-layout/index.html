@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
-  <title>2025 Esri Developer & Technology Summit - Designing Apps with Calcite Design System</title>
+  <title>2025 Esri Developer & Technology Summit</title>
 
   <!-- Calcite import -->
   <script type="module" src="https://js.arcgis.com/calcite-components/3.0.3/calcite.esm.js"></script>
@@ -23,12 +23,10 @@
 <body>
   <calcite-shell>
     <calcite-navigation slot="header" id="nav">
-      <calcite-navigation-logo href="#" icon="shopping-cart" alt="Shopping Cart" slot="logo"
+      <calcite-navigation-logo icon="shopping-cart" alt="Shopping Cart" slot="logo"
         heading="Grocery access in the United States (2024)"
         description="Areas within a 10 min walk or drive of a grocery store"></calcite-navigation-logo>
-      <calcite-action-pad layout="horizontal" expand-disabled slot="content-end">
-        <calcite-action id="toggle-mode" text="Toggle mode" icon="brightness"></calcite-action>
-      </calcite-action-pad>
+      <calcite-action slot="content-end" id="toggle-mode" text="Toggle mode" icon="brightness"></calcite-action>
 
       <calcite-tooltip placement="bottom" reference-element="toggle-mode" slot="content-end">Toggle
         mode</calcite-tooltip>
@@ -86,9 +84,17 @@
   </calcite-shell>
 
   <calcite-dialog modal id="modal" heading="About this application">
-    <h2 id="title"></h2>
-    <a id="item-url" target="_blank"><img id="thumbnail" width="200" height="133" /></a>
-    <p id="snippet"></p>
+    <calcite-card>
+      <a id="item-url" target="_blank" slot="thumbnail"><img id="thumbnail" alt="Sample image alt" width="200"
+          height="133"></a>
+      <span slot="heading" id="title"></span>
+      <span slot="description" id="snippet"></span>
+      <div slot="footer-start" id="example-slotted-footer">
+        <calcite-chip id="badge-1" value="calcite chip" icon="check-circle" scale="s"></calcite-chip>
+        <calcite-chip id="badge-2" value="calcite chip" icon="globe" scale="s"></calcite-chip>
+        <calcite-chip id="badge-3" value="calcite chip" icon="security" scale="s"></calcite-chip>
+      </div>
+    </calcite-card>
   </calcite-dialog>
 
 

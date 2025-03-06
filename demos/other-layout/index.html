@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
-  <title>2025 Esri Developer & Technology Summit - Designing Apps with Calcite Design System</title>
+  <title>2025 Esri Developer & Technology Summit</title>
 
   <!-- Calcite import -->
   <script type="module" src="https://js.arcgis.com/calcite-components/3.0.3/calcite.esm.js"></script>
@@ -23,17 +23,17 @@
 <body>
   <calcite-shell>
     <calcite-navigation navigation-action slot="header" id="nav">
-      <calcite-navigation-logo href="#" icon="shopping-cart" alt="Shopping Cart" slot="logo"
-        heading="Grocery access in the United States"
-        description="Which areas are within a 10 minute walk or 10 minute drive of a grocery store in 2024"></calcite-navigation-logo>
-      <calcite-action-pad layout="horizontal" expand-disabled slot="content-end">
-        <calcite-action id="toggle-mode" text="Toggle mode" icon="brightness"></calcite-action>
-      </calcite-action-pad>
+      <calcite-navigation-logo icon="shopping-cart" alt="Shopping Cart" slot="logo"
+        heading="Grocery access in the United States (2024)"
+        description="Areas within a 10 min walk or drive of a grocery store"></calcite-navigation-logo>
+      <calcite-action slot="content-end" id="toggle-mode" text="Toggle mode" icon="brightness"></calcite-action>
 
       <calcite-tooltip placement="bottom" reference-element="toggle-mode" slot="content-end">Toggle
         mode</calcite-tooltip>
 
     </calcite-navigation>
+
+
 
     <calcite-shell-panel id="panel-start" slot="panel-start">
 
@@ -50,8 +50,8 @@
 
           <calcite-tooltip placement="bottom" reference-element="save">Save this application</calcite-tooltip>
           <calcite-tooltip placement="bottom" reference-element="download">Download this data</calcite-tooltip>
-          <calcite-tooltip placement="bottom" reference-element="contact">Email the author</calcite-tooltip>
-          <calcite-tooltip placement="bottom" reference-element="share">Share on social media</calcite-tooltip>
+          <calcite-tooltip placement="bottom" reference-element="contact">Contact</calcite-tooltip>
+          <calcite-tooltip placement="bottom" reference-element="share">Share</calcite-tooltip>
 
           <calcite-block collapsible open heading="Search">
             <arcgis-search reference-element="my-map"></arcgis-search>

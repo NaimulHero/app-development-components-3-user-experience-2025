@@ -2,7 +2,6 @@
 
 const toggleModeEl = document.getElementById("toggle-mode");
 const toggleModalEl = document.getElementById("toggle-modal");
-
 const navigationEl = document.getElementById("nav");
 const modalEl = document.getElementById("modal");
 const darkModeCss = document.getElementById("jsapi-mode-dark");
@@ -10,7 +9,6 @@ const lightModeCss = document.getElementById("jsapi-mode-light");
 const arcgisMap = document.querySelector("arcgis-map");
 const panelStart = document.getElementById("panel-start");
 const featuresPanel = document.getElementById("features-panel");
-const tableShellPanel = document.getElementById("table-shell-panel");
 const featuresComponent = document.querySelector("arcgis-features");
 const tableElement = document.getElementById("my-table");
 const snippet = document.getElementById("snippet");
@@ -60,6 +58,14 @@ arcgisMap.addEventListener("arcgisViewClick", (event) => {
     location: mapPoint,
     fetchFeatures: true,
   });
+  if (featuresComponent.selectedFeatureIndex === -1) {
+    featuresPanel.collapsed = true;
+  }
+  featuresComponent.addEventListener("arcgisPropertyChange", (event) => {
+    if (event.detail.name === "selectedFeatureIndex") {
+      featuresPanel.collapsed = featuresComponent.selectedFeatureIndex === -1;
+    }
+  });
 });
 
 const legendPanel = document.getElementById("legend");
@@ -81,6 +87,7 @@ panelActions.forEach((action) => {
   });
 });
 
+const tableShellPanel = document.getElementById("table-shell-panel");
 const tableAction = document.getElementById("table-action");
 tableAction.addEventListener("click", () => {
   const toggleValue = !tableShellPanel.collapsed;

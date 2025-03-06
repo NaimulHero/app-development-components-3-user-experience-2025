@@ -2,22 +2,17 @@
 
 const toggleModeEl = document.getElementById("toggle-mode");
 
-const navigationEl = document.getElementById("nav");
-
-let map;
-
 const darkModeCss = document.getElementById("jsapi-mode-dark");
 const lightModeCss = document.getElementById("jsapi-mode-light");
 const arcgisMap = document.querySelector("arcgis-map");
 
+let map;
 arcgisMap.addEventListener("arcgisViewReadyChange", () => {
   map = arcgisMap.map;
 });
 
 let mode = "light";
-
 toggleModeEl.addEventListener("click", () => handleModeChange());
-
 function handleModeChange() {
   mode = mode === "dark" ? "light" : "dark";
   const isDarkMode = mode === "dark";
