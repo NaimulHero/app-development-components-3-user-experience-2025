@@ -48,6 +48,10 @@ arcgisMap.addEventListener("arcgisViewReadyChange", () => {
   tableElement.filterGeometry = arcgisMap.view.extent;
 });
 
+arcgisMap.addEventListener("arcgisViewChange", () => {
+  tableElement.filterGeometry = arcgisMap.view.extent;
+});
+
 // Add an event listener to the map to open the Features component when the user clicks on the map.
 arcgisMap.addEventListener("arcgisViewClick", (event) => {
   const { mapPoint } = event.detail;
@@ -81,7 +85,7 @@ const tableAction = document.getElementById("table-action");
 tableAction.addEventListener("click", () => {
   const toggleValue = !tableShellPanel.collapsed;
   tableShellPanel.collapsed = toggleValue;
-  tableAction.active = toggleValue;
+  tableAction.active = !toggleValue;
 });
 
 function togglePanel(id) {

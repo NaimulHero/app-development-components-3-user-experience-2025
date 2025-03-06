@@ -42,11 +42,15 @@
           <calcite-action data-toggle-panel="bookmarks" text="Bookmarks" icon="bookmark"></calcite-action>
         </calcite-action-group>
         <calcite-action-group>
-          <calcite-action id="table-action" text="Table" icon="table"></calcite-action>
+          <calcite-action id="table-action" text="Feature table" icon="table"></calcite-action>
+          <calcite-action id="toggle-modal" text="About this application" icon="information"></calcite-action>
         </calcite-action-group>
-        <calcite-action slot="actions-end" id="toggle-modal" text="About this application"
-          icon="information"></calcite-action>
       </calcite-action-bar>
+
+      <calcite-tooltip placement="trailing" reference-element="toggle-modal" close-on-click slot="content-end">About
+        this
+        application</calcite-tooltip>
+
       <calcite-panel closable id="legend" heading="Legend">
         <arcgis-legend reference-element="my-map"></arcgis-legend>
       </calcite-panel>
@@ -87,8 +91,7 @@
     <p id="snippet"></p>
   </calcite-dialog>
 
-  <calcite-tooltip placement="trailing" reference-element="toggle-modal" close-on-click slot="content-end">About this
-    application</calcite-tooltip>
+
 </body>
 
 </html>

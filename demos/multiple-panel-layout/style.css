@@ -24,5 +24,9 @@ arcgis-feature-table {
   height: 300px;
 }
 
+arcgis-features {
+  flex: 1;
+}
+
 /* Esri Developer & Technology Summit Demo Template */
 /* Custom styles below */
