@@ -43,6 +43,16 @@
       width: 300px;
       height: 300px;
     }
+
+    @media (max-width: 768px) {
+      .basemap-panel {
+        width: 200px;
+      }
+
+      .esri-search {
+        display: flex;
+        width: 200px;
+      }
   </style>
 </head>
 
@@ -50,7 +60,7 @@
   <calcite-shell>
     <calcite-navigation slot="header">
       <calcite-navigation-logo icon="shopping-cart" alt="Shopping Cart" slot="logo"
-        heading="Grocery access in the United States (2024)"
+        heading="Grocery access in the United States"
         description="Areas within a 10 min walk or drive of a grocery store"></calcite-navigation-logo>
       <calcite-action slot="content-end" id="toggle-mode" text="Toggle mode" icon="brightness"></calcite-action>
 
@@ -138,7 +148,9 @@
       panelActions.forEach((action) => {
         action.addEventListener("click", () => {
           const id = action.getAttribute("data-toggle-panel");
-          document.getElementById("primary-shell-panel").collapsed = false;
+          const primaryShellPanel = document.getElementById("primary-shell-panel");
+          closeOpenShellPanels();
+          primaryShellPanel.collapsed = !primaryShellPanel.collapsed;
           panelActions.forEach((el) => (el.active = el === action));
           panels.forEach((panel) => {
             const open = panel.id === id;
@@ -174,6 +186,7 @@
 
       arcgisFeatures.addEventListener("arcgisPropertyChange", (event) => {
         if (event.detail.name === "selectedFeature") {
+          closeOpenShellPanels();
           featuresShellPanel.collapsed = !arcgisFeatures.selectedFeature;
         }
       });
@@ -206,6 +219,7 @@
       const toggleTable = document.getElementById("toggle-table");
       toggleTable.addEventListener("click", () => {
         const toggleValue = !tableShellPanel.collapsed;
+        closeOpenShellPanels();
         tableShellPanel.collapsed = toggleValue;
         toggleTable.active = !toggleValue;
       });
@@ -238,6 +252,7 @@
       </div>
     </calcite-card>
   </calcite-dialog>
+
   <script type="module">
     const toggleDialog = document.getElementById("toggle-dialog");
     const dialog = document.getElementById("dialog");
@@ -257,6 +272,34 @@
     });
   </script>
 
+
+  <script>
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
+
+    function closeOpenShellPanels() {
+      if (mediaQuery.matches) {
+        document.querySelectorAll("calcite-shell-panel").forEach(panel => panel.collapsed = true);
+      }
+    }
+
+    closeOpenShellPanels();
+
+    mediaQuery.addEventListener("change", (event) => {
+      const shell = document.querySelector('calcite-shell');
+      shell.contentBehind = event.matches;
+
+      const navigationLogo = document.querySelector('calcite-navigation-logo');
+      navigationLogo.heading = event.matches ? "Grocery access in the U.S." : "Grocery access in the United States";
+      navigationLogo.description = event.matches ? "Groceries within a 10 min walk/drive" : "Areas within a 10 min walk or drive of a grocery store";
+
+      const actionBar = document.querySelector('calcite-action-bar');
+      actionBar.expandDisabled = event.matches;
+
+      document.querySelector('arcgis-map').padding = event.matches ? { left: 50 } : { left: 0 };
+
+      closeOpenShellPanels();
+    });
+  </script>
 </body>
 
 </html>
