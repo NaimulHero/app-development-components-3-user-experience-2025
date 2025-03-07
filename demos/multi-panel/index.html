@@ -48,7 +48,7 @@
 
 <body>
   <calcite-shell>
-    <calcite-navigation slot="header" id="nav">
+    <calcite-navigation slot="header">
       <calcite-navigation-logo icon="shopping-cart" alt="Shopping Cart" slot="logo"
         heading="Grocery access in the United States (2024)"
         description="Areas within a 10 min walk or drive of a grocery store"></calcite-navigation-logo>
@@ -149,7 +149,7 @@
       });
     </script>
 
-    <calcite-shell-panel id="features-shell-panel" collapsed id="features" slot="panel-end">
+    <calcite-shell-panel id="features-shell-panel" collapsed id="features" slot="panel-end" position="end">
       <arcgis-features reference-element="my-map"></arcgis-features>
     </calcite-shell-panel>
 
