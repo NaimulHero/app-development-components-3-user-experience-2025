@@ -53,6 +53,7 @@
         display: flex;
         width: 200px;
       }
+    }
   </style>
 </head>
 
@@ -149,8 +150,9 @@
         action.addEventListener("click", () => {
           const id = action.getAttribute("data-toggle-panel");
           const primaryShellPanel = document.getElementById("primary-shell-panel");
+          const toggleValue = !primaryShellPanel.collapsed
           closeOpenShellPanels();
-          primaryShellPanel.collapsed = !primaryShellPanel.collapsed;
+          primaryShellPanel.collapsed = toggleValue;
           panelActions.forEach((el) => (el.active = el === action));
           panels.forEach((panel) => {
             const open = panel.id === id;
