@@ -53,31 +53,23 @@
     <arcgis-map id="my-map" item-id="cece49703cc24b0783dffb3032b0679c"> </arcgis-map>
 
     <script type="module">
-      const arcgisMap = document.querySelector("arcgis-map");
-
-      let map;
       let mode = "light";
 
-      arcgisMap.addEventListener("arcgisViewReadyChange", () => {
-        map = arcgisMap.map;
-      });
-
-      const toggleModeEl = document.getElementById("toggle-mode");
-      toggleModeEl.addEventListener("click", () => handleModeChange());
-
+      const arcgisMap = document.querySelector("arcgis-map");
       const darkModeCss = document.getElementById("jsapi-mode-dark");
       const lightModeCss = document.getElementById("jsapi-mode-light");
+      const toggleMode = document.getElementById("toggle-mode");
 
-      function handleModeChange() {
+      toggleMode.addEventListener("click", () => {
         mode = mode === "dark" ? "light" : "dark";
         const isDarkMode = mode === "dark";
         darkModeCss.disabled = !darkModeCss.disabled;
         lightModeCss.disabled = !lightModeCss.disabled;
-        map.basemap = isDarkMode
+        arcgisMap.map.basemap = isDarkMode
           ? { portalItem: { id: "082831bea053406792d29b2aedcf4a81" } }
           : { portalItem: { id: "01126f0ff00143f5bcd451221ccf459a" } };
 
-        toggleModeEl.icon = isDarkMode ? "moon" : "brightness";
+        toggleMode.icon = isDarkMode ? "moon" : "brightness";
         document.body.classList.toggle("calcite-mode-dark", isDarkMode);
 
         // maps sdk workaround
@@ -90,7 +82,7 @@
           node.classList.remove(`calcite-mode-${inverseMode}`);
           node.classList.add(`calcite-mode-${mode}`);
         }
-      }
+      });
     </script>
 
   </calcite-shell>
