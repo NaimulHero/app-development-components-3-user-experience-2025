@@ -59,7 +59,7 @@
 
 <body>
   <calcite-shell>
-    <calcite-navigation slot="header">
+    <calcite-navigation slot="header" class="calcite-mode-dark">
       <calcite-navigation-logo icon="shopping-cart" alt="Shopping Cart" slot="logo"
         heading="Grocery access in the United States"
         description="Areas within a 10 min walk or drive of a grocery store"></calcite-navigation-logo>
@@ -77,14 +77,15 @@
 
       toggleMode.addEventListener("click", () => {
         const isDarkMode = document.body.classList.contains("calcite-mode-dark");
-        darkModeCss.disabled = !darkModeCss.disabled;
-        lightModeCss.disabled = !lightModeCss.disabled;
-        arcgisMap.map.basemap = isDarkMode
+        const setDarkMode = !isDarkMode;
+        darkModeCss.disabled = !setDarkMode;
+        lightModeCss.disabled = setDarkMode;
+        arcgisMap.map.basemap = setDarkMode
           ? { portalItem: { id: "082831bea053406792d29b2aedcf4a81" } }
           : { portalItem: { id: "01126f0ff00143f5bcd451221ccf459a" } };
 
-        toggleMode.icon = isDarkMode ? "moon" : "brightness";
-        document.body.classList.toggle("calcite-mode-dark", !isDarkMode);
+        toggleMode.icon = setDarkMode ? "moon" : "brightness";
+        document.body.classList.toggle("calcite-mode-dark", setDarkMode);
 
         // maps sdk workaround
         document.body.querySelectorAll(".calcite-mode-light, .calcite-mode-dark").forEach((el) => {
