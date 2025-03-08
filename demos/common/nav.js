@@ -5,7 +5,6 @@ export default `<calcite-navigation id="nav" navigation-action slot="header">
           alt="Application logo"
           slot="logo"
           heading="Museums in the United States"
-          description=""
         ></calcite-navigation-logo>
         <calcite-action-pad
           layout="horizontal"
