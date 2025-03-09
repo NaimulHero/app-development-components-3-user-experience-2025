@@ -59,6 +59,7 @@
 
 <body>
   <calcite-shell>
+
     <calcite-navigation slot="header" class="calcite-mode-dark">
       <calcite-navigation-logo icon="shopping-cart" alt="Shopping Cart" slot="logo"
         heading="Grocery access in the United States"
@@ -232,6 +233,7 @@
         <calcite-action scale="s" id="basemap-action" icon="basemap"></calcite-action>
       </arcgis-placement>
     </arcgis-map>
+
   </calcite-shell>
 
   <calcite-dialog modal id="dialog" heading="About this application">
@@ -267,7 +269,6 @@
     });
   </script>
 
-
   <script>
     const mediaQuery = window.matchMedia("(max-width: 768px)");
 
@@ -295,6 +296,7 @@
       closeOpenShellPanels();
     });
   </script>
+
 </body>
 
 </html>
