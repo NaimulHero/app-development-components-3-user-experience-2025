@@ -30,16 +30,47 @@
       --calcite-navigation-logo-text-color: var(--calcite-color-brand);
     }
 
-    calcite-shell-panel[slot="panel-start"] calcite-flow {
-      border-top: 0;
-    }
-
+    calcite-shell-panel[slot="panel-start"] calcite-flow,
     calcite-shell-panel[slot="panel-end"] calcite-action-bar {
       border-top: 0;
     }
 
     arcgis-search {
       display: flex;
+    }
+
+    :root,
+    .calcite-mode-light {
+      --calcite-color-brand: #238b45;
+      --calcite-color-brand-hover: #a1d99b;
+      --calcite-color-brand-press: #41ab5d;
+
+      --calcite-color-background: #f7fcf5;
+      --calcite-color-foreground-1: #e5f5e0;
+      --calcite-color-foreground-2: #c7e9c0;
+      --calcite-color-foreground-3: #a1d99b;
+
+      --calcite-color-text-2: #005a32;
+      --calcite-color-text-3: #238b45;
+    }
+
+    .calcite-mode-dark {
+      --calcite-color-brand: #e5f5e0;
+      --calcite-color-brand-hover: #f7fcf5;
+      --calcite-color-brand-press: #c7e9c0;
+
+      --calcite-color-background: #005a32;
+      --calcite-color-foreground-1: #005a32;
+      --calcite-color-foreground-2: #238b45;
+      --calcite-color-foreground-3: #41ab5d;
+
+      --calcite-color-text-2: #f7fcf5;
+      --calcite-color-text-3: #e5f5e0;
+    }
+
+    calcite-shell .esri-widget {
+      color: inherit;
+      background-color: inherit;
     }
   </style>
 </head>
@@ -124,6 +155,7 @@
 
         const drillInClassName = "drill-in";
 
+        // create a new flow item component
         function createFlowItem(heading, componentName) {
           const flowItem = document.createElement("calcite-flow-item");
           flowItem.heading = heading;
@@ -138,6 +170,7 @@
         flowActions.forEach((action) => {
           action.addEventListener("click", () => {
             rootFlowItem.selected = false;
+            // remove existing flow item
             document.querySelector(`.${drillInClassName}`)?.remove();
 
             let newFlowItem;
@@ -174,6 +207,8 @@
         const setDarkMode = !isDarkMode;
         darkModeCss.disabled = !setDarkMode;
         lightModeCss.disabled = setDarkMode;
+
+        // toggle basemap based on mode
         arcgisMap.map.basemap = setDarkMode
           ? { portalItem: { id: "082831bea053406792d29b2aedcf4a81" } }
           : { portalItem: { id: "01126f0ff00143f5bcd451221ccf459a" } };
@@ -181,7 +216,7 @@
         toggleMode.icon = setDarkMode ? "moon" : "brightness";
         document.body.classList.toggle("calcite-mode-dark", setDarkMode);
 
-        // maps sdk workaround
+        // toggle all existing mode classes within the body
         document.body.querySelectorAll(".calcite-mode-light, .calcite-mode-dark").forEach((el) => {
           el.classList.toggle("calcite-mode-light");
           el.classList.toggle("calcite-mode-dark");

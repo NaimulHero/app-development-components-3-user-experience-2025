@@ -81,6 +81,8 @@
         const setDarkMode = !isDarkMode;
         darkModeCss.disabled = !setDarkMode;
         lightModeCss.disabled = setDarkMode;
+
+        // toggle basemap based on mode
         arcgisMap.map.basemap = setDarkMode
           ? { portalItem: { id: "082831bea053406792d29b2aedcf4a81" } }
           : { portalItem: { id: "01126f0ff00143f5bcd451221ccf459a" } };
@@ -88,7 +90,7 @@
         toggleMode.icon = setDarkMode ? "moon" : "brightness";
         document.body.classList.toggle("calcite-mode-dark", setDarkMode);
 
-        // maps sdk workaround
+        // toggle all existing mode classes within the body
         document.body.querySelectorAll(".calcite-mode-light, .calcite-mode-dark").forEach((el) => {
           el.classList.toggle("calcite-mode-light");
           el.classList.toggle("calcite-mode-dark");
@@ -147,7 +149,11 @@
           const toggleValue = !primaryShellPanel.collapsed
           closeOpenShellPanels();
           primaryShellPanel.collapsed = toggleValue;
+
+          // set current action as active
           panelActions.forEach((el) => (el.active = el === action));
+
+          // open the panel that matches the action and close others
           panels.forEach((panel) => {
             const open = panel.id === id;
             panel.closed = !open;
@@ -180,6 +186,7 @@
         });
       });
 
+      // when selectedFeature on arcgisFeatures changes, open the features panel or close it
       arcgisFeatures.addEventListener("arcgisPropertyChange", (event) => {
         if (event.detail.name === "selectedFeature") {
           closeOpenShellPanels();
@@ -197,6 +204,7 @@
       const mapForFeatureTable = document.querySelector("arcgis-map");
       const arcgisFeatureTable = document.querySelector("arcgis-feature-table");
 
+      // setup arcgis feature table
       mapForFeatureTable.addEventListener("arcgisViewReadyChange", (event) => {
         const arcgisMap = event.target;
         const tableLayer = arcgisMap.map.allLayers.find(
@@ -207,12 +215,15 @@
         arcgisFeatureTable.filterGeometry = arcgisMap.view.extent;
       });
 
+      // update the filterGeometry of the feature table when the view changes
       mapForFeatureTable.addEventListener("arcgisViewChange", (event) => {
         arcgisFeatureTable.filterGeometry = event.target.view.extent;
       });
 
       const tableShellPanel = document.getElementById("table-shell-panel");
       const toggleTable = document.getElementById("toggle-table");
+
+      // toggle the feature table when the user clicks the table button
       toggleTable.addEventListener("click", () => {
         const toggleValue = !tableShellPanel.collapsed;
         closeOpenShellPanels();
@@ -260,6 +271,7 @@
     const itemUrl = document.getElementById("item-url");
     const itemTitle = document.getElementById("item-title");
 
+    // update the dialog content when the map is ready
     document.querySelector("arcgis-map").addEventListener("arcgisViewReadyChange", (event) => {
       const { title, snippet, itemPageUrl, thumbnailUrl } = event.target.map.portalItem;
       itemTitle.textContent = title;
@@ -270,6 +282,7 @@
   </script>
 
   <script>
+    // responsive media query
     const mediaQuery = window.matchMedia("(max-width: 768px)");
 
     function closeOpenShellPanels() {
@@ -280,6 +293,7 @@
 
     closeOpenShellPanels();
 
+    // update the shell layout based on the media query
     mediaQuery.addEventListener("change", (event) => {
       const shell = document.querySelector('calcite-shell');
       shell.contentBehind = event.matches;
@@ -291,6 +305,7 @@
       const actionBar = document.querySelector('calcite-action-bar');
       actionBar.expandDisabled = event.matches;
 
+      // update the padding of the map based on the media query
       document.querySelector('arcgis-map').padding = event.matches ? { left: 50 } : { left: 0 };
 
       closeOpenShellPanels();

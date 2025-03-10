@@ -60,6 +60,8 @@
         const setDarkMode = !isDarkMode;
         darkModeCss.disabled = !setDarkMode;
         lightModeCss.disabled = setDarkMode;
+
+        // toggle basemap based on mode
         arcgisMap.map.basemap = setDarkMode
           ? { portalItem: { id: "082831bea053406792d29b2aedcf4a81" } }
           : { portalItem: { id: "01126f0ff00143f5bcd451221ccf459a" } };
@@ -67,7 +69,7 @@
         toggleMode.icon = setDarkMode ? "moon" : "brightness";
         document.body.classList.toggle("calcite-mode-dark", setDarkMode);
 
-        // maps sdk workaround
+        // toggle all existing mode classes within the body
         document.body.querySelectorAll(".calcite-mode-light, .calcite-mode-dark").forEach((el) => {
           el.classList.toggle("calcite-mode-light");
           el.classList.toggle("calcite-mode-dark");
