@@ -20,8 +20,10 @@
     body {
       margin: 0;
       height: 100%;
+      min-width: 375px;
     }
 
+    /* customize an individual component */
     calcite-navigation-logo {
       --calcite-navigation-logo-text-color: var(--calcite-color-brand);
     }
@@ -44,6 +46,7 @@
       height: 300px;
     }
 
+    /* responsive styles */
     @media (max-width: 768px) {
       .basemap-panel {
         width: 200px;
@@ -71,9 +74,14 @@
     </calcite-navigation>
 
     <script type="module">
+      // get a reference to the map component
       const arcgisMap = document.querySelector("arcgis-map");
+
+      // get a reference to the dark and light mode css
       const darkModeCss = document.getElementById("jsapi-mode-dark");
       const lightModeCss = document.getElementById("jsapi-mode-light");
+
+      // get a reference to the toggle mode button
       const toggleMode = document.getElementById("toggle-mode");
 
       toggleMode.addEventListener("click", () => {
@@ -112,9 +120,6 @@
         </calcite-action-group>
       </calcite-action-bar>
 
-      <calcite-tooltip placement="trailing" reference-element="toggle-dialog" close-on-click slot="content-end">About
-        this application</calcite-tooltip>
-
       <calcite-panel closable id="legend-panel" heading="Legend">
         <arcgis-legend reference-element="my-map"></arcgis-legend>
       </calcite-panel>
@@ -129,29 +134,35 @@
 
     </calcite-shell-panel>
 
+    <calcite-tooltip placement="trailing" reference-element="toggle-dialog" close-on-click>About
+      this application</calcite-tooltip>
+
     <script type="module">
+      // close shell panel when panel is closed
       const primaryShellPanel = document.getElementById("primary-shell-panel");
       primaryShellPanel.addEventListener(
         "calcitePanelClose",
         () => (primaryShellPanel.collapsed = true)
       );
 
+      // get all panels and actions
       const legendPanel = document.getElementById("legend-panel");
       const layersPanel = document.getElementById("layers-panel");
       const bookmarksPanel = document.getElementById("bookmarks-panel");
       const panels = [legendPanel, layersPanel, bookmarksPanel];
       const panelActions = document.querySelectorAll("[data-toggle-panel]");
 
+      // for each panel action, add a click event listener to open the panel
       panelActions.forEach((action) => {
         action.addEventListener("click", () => {
           const id = action.getAttribute("data-toggle-panel");
           const primaryShellPanel = document.getElementById("primary-shell-panel");
-          const toggleValue = !primaryShellPanel.collapsed
+          const toggleValue = action.active;
           closeOpenShellPanels();
           primaryShellPanel.collapsed = toggleValue;
 
-          // set current action as active
-          panelActions.forEach((el) => (el.active = el === action));
+          // toggle active state on the action that was clicked
+          panelActions.forEach((el) => (el.active = el === action && !toggleValue));
 
           // open the panel that matches the action and close others
           panels.forEach((panel) => {
@@ -304,6 +315,7 @@
 
       const actionBar = document.querySelector('calcite-action-bar');
       actionBar.expandDisabled = event.matches;
+      actionBar.expanded = false;
 
       // update the padding of the map based on the media query
       document.querySelector('arcgis-map').padding = event.matches ? { left: 50 } : { left: 0 };
