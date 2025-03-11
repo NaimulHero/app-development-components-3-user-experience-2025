@@ -12,4 +12,12 @@ Most of the slides are made available at [Esri Events > Proceedings](https://www
 - [Multi panel](https://codepen.io/driskull/pen/QwWgBjO?editors=1000)
 - [Flow, Bocks, Theming](https://codepen.io/driskull/pen/ZYEyMQE?editors=1000)
 
-## Related sessions
+## Resources
+
+- Calcite
+  - [Calcite resources​](https://developers.arcgis.com/calcite-design-system/resources/)
+  - [Calcite tutorials​​](https://developers.arcgis.com/calcite-design-system/tutorials/)
+  - [Calcite community forum​](https://community.esri.com/t5/calcite-design-system/ct-p/calcite-design-system)
+- ArcGIS blog posts​
+  - [JavaScript Maps SDK: A full transition to components​](https://www.esri.com/arcgis-blog/products/js-api-arcgis/developers/javascript-maps-sdk-a-full-transition-to-components/)
+  - [All things Web Development at the Esri Developer and Technology Summit 2025!​](https://www.esri.com/arcgis-blog/products/js-api-arcgis/developers/all-things-web-development-at-the-developer-and-technology-summit-2025/)
