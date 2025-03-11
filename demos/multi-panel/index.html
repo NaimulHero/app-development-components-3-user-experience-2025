@@ -299,6 +299,7 @@
     function closeOpenShellPanels() {
       if (mediaQuery.matches) {
         document.querySelectorAll("calcite-shell-panel").forEach(panel => panel.collapsed = true);
+        document.querySelectorAll("calcite-action[active]").forEach(action => action.active = false);
       }
     }
 
