@@ -8,8 +8,8 @@ Most of the slides are made available at [Esri Events > Proceedings](https://www
 
 ## Codepen links
 
-[Simple panel](https://codepen.io/driskull/pen/jEOwpYp?editors=1000)
-[Multi panel](https://codepen.io/driskull/pen/QwWgBjO?editors=1000)
-[Flow, Bocks, Theming](https://codepen.io/driskull/pen/ZYEyMQE?editors=1000)
+- [Simple panel](https://codepen.io/driskull/pen/jEOwpYp?editors=1000)
+- [Multi panel](https://codepen.io/driskull/pen/QwWgBjO?editors=1000)
+- [Flow, Bocks, Theming](https://codepen.io/driskull/pen/ZYEyMQE?editors=1000)
 
 ## Related sessions
