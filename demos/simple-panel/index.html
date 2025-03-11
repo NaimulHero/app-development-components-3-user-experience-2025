@@ -51,8 +51,11 @@
 
     <script type="module">
       const arcgisMap = document.querySelector("arcgis-map");
+      // <link id="jsapi-mode-light" rel="stylesheet" href="https://js.arcgis.com/4.32/esri/themes/light/main.css">
+      // <link id="jsapi-mode-dark" rel="stylesheet" href="https://js.arcgis.com/4.32/esri/themes/dark/main.css" disabled="">
       const darkModeCss = document.getElementById("jsapi-mode-dark");
       const lightModeCss = document.getElementById("jsapi-mode-light");
+
       const toggleMode = document.getElementById("toggle-mode");
 
       toggleMode.addEventListener("click", () => {
@@ -66,7 +69,10 @@
           ? { portalItem: { id: "082831bea053406792d29b2aedcf4a81" } }
           : { portalItem: { id: "01126f0ff00143f5bcd451221ccf459a" } };
 
+        // toggle action icon
         toggleMode.icon = setDarkMode ? "moon" : "brightness";
+
+        // toggle body class
         document.body.classList.toggle("calcite-mode-dark", setDarkMode);
 
         // toggle all existing mode classes within the body

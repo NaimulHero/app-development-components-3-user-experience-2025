@@ -115,8 +115,8 @@
           <calcite-action data-toggle-panel="bookmarks-panel" text="Bookmarks" icon="bookmark"></calcite-action>
         </calcite-action-group>
         <calcite-action-group>
-          <calcite-action id="toggle-table" text="Feature table" icon="table"></calcite-action>
           <calcite-action id="toggle-dialog" text="About this application" icon="information"></calcite-action>
+          <calcite-action id="toggle-table" text="Feature table" icon="table"></calcite-action>
         </calcite-action-group>
       </calcite-action-bar>
 
@@ -138,13 +138,6 @@
       this application</calcite-tooltip>
 
     <script type="module">
-      // close shell panel when panel is closed
-      const primaryShellPanel = document.getElementById("primary-shell-panel");
-      primaryShellPanel.addEventListener(
-        "calcitePanelClose",
-        () => (primaryShellPanel.collapsed = true)
-      );
-
       // get all panels and actions
       const legendPanel = document.getElementById("legend-panel");
       const layersPanel = document.getElementById("layers-panel");
@@ -172,6 +165,16 @@
           });
         });
       });
+
+      // close shell panel when panel is closed
+      const primaryShellPanel = document.getElementById("primary-shell-panel");
+      primaryShellPanel.addEventListener(
+        "calcitePanelClose",
+        () => {
+          primaryShellPanel.collapsed = true;
+          panelActions.forEach((el) => (el.active = false));
+        }
+      );
     </script>
 
     <calcite-shell-panel id="features-shell-panel" collapsed id="features" slot="panel-end" position="end">
