@@ -182,12 +182,6 @@
     </calcite-shell-panel>
 
     <script type="module">
-      const featuresShellPanel = document.getElementById("features-shell-panel");
-      featuresShellPanel.addEventListener(
-        "calciteFlowItemClose",
-        () => (featuresShellPanel.collapsed = true)
-      );
-
       const arcgisFeatures = document.querySelector("arcgis-features");
 
       // Add an event listener to the map to open the Features component when the user clicks on the map.
@@ -207,6 +201,13 @@
           featuresShellPanel.collapsed = !arcgisFeatures.selectedFeature;
         }
       });
+
+      // close shell panel when features panel is closed
+      const featuresShellPanel = document.getElementById("features-shell-panel");
+      featuresShellPanel.addEventListener(
+        "calciteFlowItemClose",
+        () => (featuresShellPanel.collapsed = true)
+      );
     </script>
 
     <calcite-shell-panel id="table-shell-panel" collapsed display-mode="dock" slot="panel-bottom" height="l"
