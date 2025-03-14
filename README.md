@@ -17,6 +17,7 @@ Most of the slides are made available at [Esri Events > Proceedings](https://www
 - Calcite
   - [Calcite resources​](https://developers.arcgis.com/calcite-design-system/resources/)
   - [Calcite tutorials​​](https://developers.arcgis.com/calcite-design-system/tutorials/)
+  - [Example apps](https://github.com/EsriDevEvents/dev-tech-summit-demo-templates)
   - [Calcite community forum​](https://community.esri.com/t5/calcite-design-system/ct-p/calcite-design-system)
 - Maps SDK for JS components​
   - [Overview](https://developers.arcgis.com/javascript/latest/components/)

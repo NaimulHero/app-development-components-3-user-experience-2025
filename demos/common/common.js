@@ -1,11 +1,11 @@
-import dialogHtml from "./dialog.js";
-import sheetHtml from "./sheet.js";
 import navHtml from "./nav.js";
+import sheetHtml from "./sheet.js";
+import dialogHtml from "./dialog.js";
 
 class Common {
   constructor() {
     this.initialize();
-    this.arcgisMap = document.querySelector("arcgis-map");
+    this.arcgisMap = document.getElementById("arcgisMap");
     this.sheet = document.getElementById("sheet");
     this.navigation = document.getElementById("nav");
     this.panel = document.getElementById("sheet-panel");
@@ -29,7 +29,6 @@ class Common {
     const shell = document.querySelector("calcite-shell");
     if (isNav) {
       shell?.prepend(element);
-
       const navLogo = element.querySelector("calcite-navigation-logo");
       navLogo.description = this.isMapCentric
         ? "Map Centric"
@@ -100,33 +99,33 @@ class Common {
       const view = event?.target?.view;
       if (!view) return;
 
-      const layer = view.map.allLayers.find(
+      const chartLayer = view.map.allLayers.find(
         (layer) => layer.id === "18066f67b9f-layer-5"
       );
-      this.setupCharts(layer, view);
+      this.setupCharts(chartLayer, view);
     });
   }
 
   async setupCharts(layer, view) {
     const loadedLayer = await layer.load();
-    const charts = [
+    const chartData = [
       { id: "chart", index: 2 },
       { id: "chart2", index: 5 },
       { id: "chart3", index: 6 },
     ];
-    charts.forEach(({ id, index }) => {
+    chartData.forEach(({ id, index }) => {
       const chartElement = document.getElementById(id);
-      if (chartElement?.parentElement) {
-        chartElement.parentElement.heading =
-          loadedLayer.charts[index].title.content.text;
+      const chart = loadedLayer.charts[index];
+      const calcitePanel = chartElement?.parentElement;
+      if (calcitePanel) {
+        calcitePanel.heading = chart.title.content.text;
       }
-      chartElement.id = id;
       chartElement.view = view;
       chartElement.layer = layer;
-      chartElement.model = loadedLayer.charts[index];
+      chartElement.model = chart;
       chartElement.enableResponsiveFeatures = true;
-      loadedLayer.charts[index].title.visible = false;
-      loadedLayer.charts[index].legend.visible = false;
+      chart.title.visible = false;
+      chart.legend.visible = false;
     });
   }
 }
